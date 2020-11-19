@@ -1,0 +1,45 @@
+// Get motes values
+GET http://localhost:8080/iotlab/rest/data/1/light1/last
+
+###
+
+// Set motes
+PUT http://localhost:8080/iotlab/rest/data/1/light1/last/123.54
+Content-Type: application/json
+
+{"value": 123.5656}
+
+###
+
+PUT http://localhost:8080/iotlab/rest/data/1/light1/last/51.34
+Content-Type: application/json
+
+{"value": 518.1356}
+
+###
+
+PUT http://localhost:8080/iotlab/rest/data/1/light1/last/18.199
+Content-Type: application/json
+
+{"value": 258.8946}
+
+###
+
+// Get application state
+GET http://localhost:8080/api_response
+
+###
+
+// Set application state to 500
+PUT http://localhost:8080/api_response
+Content-Type: application/json
+
+{"http_status_code": 500}
+
+###
+
+// Set application state back to 200
+PUT http://localhost:8080/api_response
+Content-Type: application/json
+
+{"http_status_code": 200}
