@@ -18,13 +18,13 @@ L'URL a été choisie pour que le suffixe soit identique à celui du vrai IOTLab
 GET http://localhost:8080/iotlab/rest/data/1/light1/last
 ```
 
-### Ajouter ou changer la valeur de température d'une *mote*
+### Ajouter ou changer la valeur de lumière d'une *mote*
 
 ```http request
 PUT http://localhost:8080/iotlab/rest/data/1/light1/last/<moteId>
 Content-Type: application/json
 
-{"value": <tempValue>}
+{"value": <lightValue>}
 ``` 
 
 ### Mettre l'API en mode erreur
