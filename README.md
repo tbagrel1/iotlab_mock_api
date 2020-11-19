@@ -6,7 +6,7 @@ Cette API Spring Boot permet de mocker l'API du vrai IOTLab pour tester son appl
 
 Elle intègre une base de données intégrée Derby qui sert à représenter la valeur des motes pendant l'exécution. La base étant *embedded*, toute configuration est perdue lorsque l'API est fermée.
 
-## Utilisation
+## Utilisation sur l'hôte
 
 Le fichier `requests.http` permet d'utiliser facilement l'API sans sortir d'IntelliJ.
 
@@ -51,4 +51,38 @@ Content-Type: application/json
 
 ```http request
 GET http://localhost:8080/api_response
+```
+
+## Utilisation avec Android
+
+Si vous utilisez l'émulateur Android, et que l'API de mock tourne sur la machine hôte, il faut utiliser l'URL suivante dans le projet Android : `http://10.0.2.2:8080/iotlab/rest/data/1/light1/last`.
+
+En effet, [`10.0.2.2` référence le `localhost` de la machine hôte depuis l'émulateur Android](https://stackoverflow.com/questions/5528850/how-do-you-connect-localhost-in-the-android-emulator).
+
+De plus, il faut également que votre application Android autorise le traffic HTTP non chiffré vers ce domaine :
+
+`res/xml/network_security_config.xml` :
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+    <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="true">iotlab.telecomnancy.eu</domain>
+        <domain includeSubdomains="true">10.0.2.2</domain>
+    </domain-config>
+</network-security-config>
+```
+
+`manifests/AndroidManifest.xml` :
+
+```xml
+...
+
+<application
+        ...
+        android:networkSecurityConfig="@xml/network_security_config"
+        ...   
+>
+
+...
 ```
